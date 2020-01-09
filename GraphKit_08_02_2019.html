@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>  
+  <head>  
+    <title>Graph Kit (2019)</title>
+    <script src="GK_housekeeping_08_02_2019.js"></script>
+    <script src="Smart_art_10_08_2019.js"></script>
+    <script src ="output_html_08_02_2019.js"></script>
+    <script src ="object_wizard_08_02_2019.js"></script>
+    <script src ="GK_core_drawing_08_02_2019.js"></script>
+
+<style type="text/css">  
+            canvas { border: 0px solid black; }  
+           .xx {display: block; width: 40px; height 30px; margin: 2px; background-color: #efefef;}
+            .xx:hover { background-color: #cdcdcd; border: thin solid #cc0000;}
+            .yy {display: block; margin: 0px; }
+           .yy:hover {border: thin solid black;}
+</style>  
+</head>  
+
+<body onload="draw();">
+  <form name="cs">
+  <header style = "width: 500px; height: 40px;">
+       <img src = "econgk2.jpg"/>
+  </header>
+
+  <aside style = "float: left; display: block; width: 45px; height: 405px; margin: 2px; background-color:#efefef; border: solid thin #909090; border-bottom: solid thick #dd0000;">
+      <div class = "xx" id="line"  style="cursor: pointer;" onclick="clz(0);"><img src="f1.gif" /></div>
+      <div class = "xx" id="rectangle"  style="cursor: pointer;" onclick="clz(1);"><img src="f3a.gif"/></div>
+      <div class = "xx" id="point"  style="cursor: pointer;" onclick="clz(2);"><img src="f5.gif"/></div>
+      <div class = "xx" id="triangle1" style="cursor: pointer;" onclick="clz(3);"><img src="f7.gif"/></div>
+      <div class = "xx" id="fcn" style="cursor: pointer;" onclick="clz(4);"><div style =" padding: 3px; font-size: 18px; font-style: italic; font-weight: bold; text-align: center;"> f(x)</div></div>
+      <div class = "xx" id="arrow1" style="cursor: pointer;"onclick="clz(5);"><img src="f12.gif"/></div>
+      <div class = "xx" id="circle" style="cursor: pointer;" onclick="clz(6);"><img src="f15.gif"/></div>
+      <div class = "xx" id="slice"  style="cursor: pointer;" onclick="clz(7);"><img src="f16.gif"/></div>
+      <div class = "xx" id="label" style="cursor: pointer;" onclick="clz(8);"><img src="f14.gif"/></div>
+        <div class = "xx" id="slider" style="cursor: pointer;" onclick="clz(9);"><img src="slider_icon.gif"/></div>
+  </aside>
+
+  <section style = "float:left; width: 460px; margin: 2px;">
+         <canvas id="Smartart" width="450" height="405" bgcolor="#efefef">
+           No support for the HTML5 object!
+        </canvas>  
+  </section>
+
+  <footer style = " width: 490px; clear: both; padding: 3px; background-color: #cad8ff">
+      <span style = "display: block; padding: 5px; font-weight: bold; font-variant: small-caps; text-align: center; border-bottom: thin solid black;">right-click on the image to save as '*.png'.</span>
+      <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Title: <input type="text" name = "title" value = "Graph" style = "width: 250px; height: 20px;" onchange="csUpdate(1,this.form.title.value);"onfocus = "if(this.value !='') this.value='';" />
+      </span>
+      <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Size (max: 360): <input type="text" name = "size" value = "300" style = "width: 40px; height: 20px;" onchange="csUpdate(2,this.form.size.value);" onfocus = "if(this.value !='') this.value='';"/>
+     </span><br/>
+     <span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-Axis label: <input type="text" name = "xlbl" value = "none" style = "width: 150px; height: 18px; " onchange="csUpdate(6,this.form.xlbl.value);" onfocus = "if(this.value !='') this.value='';"/>
+     </span>
+     <span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-max: <input type="text" name = "xmax" value = "100" style = "width: 40px; height: 18px;" onchange="csUpdate(7,this.form.xmax.value);" onfocus = "if(this.value !='') this.value='';"/>
+     </span>
+     <span style = "font-weight: bold; font-family: arial; font-size: small;">
+x-scale: <input type="text" name = "xscale" value = "10" style = "width: 40px; height: 18px;" onchange="csUpdate(8,this.form.xscale.value);" onfocus = "if(this.value !='') this.value='';"/>
+    </span><br/>
+    <span style = "font-weight: bold; font-family: arial; font-size: small; ">
+Axes on? <input type="checkbox" name = "x_axis_on" checked = "checked" style = "background-color: #ffffff;" onchange="csUpdate(3,this.form.x_axis_on.value);"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Grid on? <input type="checkbox" name = "x_grid_on" checked = "checked"  onchange="csUpdate(4,this.form.x_grid_on.value);"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Axis labels on? <input type="checkbox" name = "x_number_on" checked = "checked"  onchange="csUpdate(5,this.form.x_number_on.value);"/>
+    </span><br/>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-Axis label: <input type="text" name = "ylbl" value = "none" style = "width: 150px; height: 18px;" onchange="csUpdate(9,this.form.ylbl.value);" onfocus = "if(this.value !='') this.value='';"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-max: <input type="text" name = "ymax" value = "100" style = "width: 40px; height: 18px;" onchange="csUpdate(10,this.form.ymax.value);" onfocus = "if(this.value !='') this.value='';"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+y-scale: <input type="text" name = "yscale" value = "10" style = "width: 40px; height: 18px;" onchange="csUpdate(11,this.form.yscale.value);" onfocus = "if(this.value !='') this.value='';"/>
+    </span><br/>
+    <span style = "font-weight: bold; font-family: arial; font-size: small; ">
+Axes on? <input type="checkbox" name = "y_axis_on" checked = "checked" style = "background-color: #ffffff;" onchange="csUpdate(12,this.form.y_axis_on.value);"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Grid on? <input type="checkbox" name = "y_grid_on" checked = "checked"  onchange="csUpdate(13,this.form.y_grid_on.value);"/>
+    </span>
+    <span style = "font-weight: bold; font-family: arial; font-size: small;">
+Axis labels on? <input type="checkbox" name = "y_number_on" checked = "checked"  onchange="csUpdate(14,this.form.y_number_on.value);"/>
+    </span><br/>
+    <span style = "display: block; padding: 5px; font-weight: bold; font-family: arial; font-size: small; text-align: center; border-top: thin solid black;">
+       <input type = "button" value="Generate code" onclick="window1();"/>
+       <input type = "hidden" value = "Help" onclick = ' flag4 = 1; item = "Function"; cl_temp = "maroon"; doSomething("70,0,0,0,2,0,0,60","2","0");'/>
+       <input type = "button" value="Undo" onclick="undo();"/>
+       <input type = "button" value="Reset" onclick="resetx();"/>
+    </span>
+</footer>
+</form>
+</body>
+</html>
